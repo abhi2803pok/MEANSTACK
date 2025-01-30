@@ -1,10 +1,10 @@
-
-/* mat-card {
-  width: 40%;
+mat-card {
+  width: 60%;
   height: 10%;
-  margin: auto;
+  margin-top: 1rem;
   background-color: black;
-} */
+  color: black;
+}
 
 textarea{
   background-color: white;
@@ -14,3 +14,8 @@ textarea{
 
 
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Adjust spacing as needed */
+}

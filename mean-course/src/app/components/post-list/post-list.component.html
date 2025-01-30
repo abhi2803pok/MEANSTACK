@@ -1,9 +1,14 @@
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title> This is the expansion title </mat-panel-title>
+<mat-accordion multi="true" *ngIf="posts && posts.length > 0">
+  <mat-expansion-panel *ngFor="let post of posts">
+    <mat-expansion-panel-header >
+      <mat-panel-title> {{ post?.title }} </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
+    <p>{{ post?.content }}</p>
+    <mat-action-row>
+      <button mat-button style="color: primary;">Edit</button>
+      <button mat-button style="color: red;">Delete</button>
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
+<p class="mat-body-1" *ngIf="!posts || posts.length <= 0">No Posts Added Yet </p>
