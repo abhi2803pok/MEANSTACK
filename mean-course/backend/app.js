@@ -1,15 +1,15 @@
-const bodyParser = require("body-parser");
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get((req, res, next) => {
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
-    "Access-control-Allow-Headers",
+    "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.setHeader(
@@ -20,33 +20,29 @@ app.get((req, res, next) => {
 });
 
 app.post("/api/posts", (req, res, next) => {
-  console.log(req.body, "req.body");
+  const post = req.body;
+  console.log(post);
   res.status(201).json({
-    message: "Post added sucessfully",
+    message: 'Post added successfully'
   });
-  console.log(res, "res");
 });
-app.use("/api/posts", (req, res, next) => {
-  posts = [
+
+app.get("/api/posts", (req, res, next) => {
+  const posts = [
     {
-      id: "ud1",
-      title: "this is first title",
-      content: "this is first content",
+      id: "fadf12421l",
+      title: "First server-side post",
+      content: "This is coming from the server"
     },
     {
-      id: "ud2",
-      title: "this is second title",
-      content: "this is second content",
-    },
-    {
-      id: "ud3",
-      title: "this is third title",
-      content: "this is third content",
-    },
+      id: "ksajflaj132",
+      title: "Second server-side post",
+      content: "This is coming from the server!"
+    }
   ];
   res.status(200).json({
-    message: "Posts Fetched Sucessfully",
-    posts: posts,
+    message: "Posts fetched successfully!",
+    posts: posts
   });
 });
 
