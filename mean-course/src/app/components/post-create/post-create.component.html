@@ -1,8 +1,10 @@
 <mat-card>
+  <mat-spinner> </mat-spinner>
   <form
+    *ngIf="!isLoading"
     (ngSubmit)="onAddPost(postForm)"
     #postForm="ngForm"
-    style="display: flex; flex-direction: column; gap: 1rem;"
+    style="display: flex; flex-direction: column; gap: 1rem"
   >
     <!-- Title Field -->
     <mat-form-field appearance="fill">
@@ -11,11 +13,12 @@
         type="text"
         matInput
         name="title"
-        ngModel
         required
         placeholder="Post Title"
-        #title = ngModel/>
-        <mat-error *ngIf="title.invalid">Please enter valid title</mat-error>
+        #title="ngModel"
+        [ngModel]="post?.title"
+      />
+      <mat-error *ngIf="title.invalid">Please enter valid title</mat-error>
     </mat-form-field>
 
     <!-- Content Field -->
@@ -25,10 +28,10 @@
         matInput
         rows="6"
         name="content"
-        ngModel
-        #content=ngModel
+        #content="ngModel"
         placeholder="Post Content"
         required
+        [ngModel]="post?.content"
       ></textarea>
       <mat-error *ngIf="content.invalid">Please enter valid content</mat-error>
     </mat-form-field>

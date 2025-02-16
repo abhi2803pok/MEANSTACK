@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [MatToolbarModule],
+  imports: [MatToolbarModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

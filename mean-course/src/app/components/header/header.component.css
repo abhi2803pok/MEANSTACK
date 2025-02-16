@@ -1,0 +1,19 @@
+ul li{
+  list-style: none;
+  display: inline;
+  margin-right: 10px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+li:active{
+  color: red;
+  height: 100%;
+  width: 100%;
+}
+
+.spaces {
+  margin-left: 90%;
+
+}
