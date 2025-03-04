@@ -2,8 +2,8 @@
   <mat-spinner> </mat-spinner>
   <form
     *ngIf="!isLoading"
-    (ngSubmit)="onAddPost(postForm)"
-    #postForm="ngForm"
+    (ngSubmit)="onAddPost()"
+    [formGroup] = "form"
     style="display: flex; flex-direction: column; gap: 1rem"
   >
     <!-- Title Field -->
@@ -14,12 +14,18 @@
         matInput
         name="title"
         required
+        formControlName="title"
         placeholder="Post Title"
-        #title="ngModel"
-        [ngModel]="post?.title"
       />
-      <mat-error *ngIf="title.invalid">Please enter valid title</mat-error>
+      <mat-error *ngIf="form?.get('title')?.invalid">Please enter valid title</mat-error>
     </mat-form-field>
+    <div style="margin-top: 30px">
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+      <input type="file" #filePicker class="type" (change)="onImageUploadPicked($event)" />
+    </div>
+    <div class="imagePreview" *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="form.get(title).value" />
+    </div>
 
     <!-- Content Field -->
     <mat-form-field appearance="fill">
@@ -28,12 +34,11 @@
         matInput
         rows="6"
         name="content"
-        #content="ngModel"
+        formControlName="content"
         placeholder="Post Content"
         required
-        [ngModel]="post?.content"
       ></textarea>
-      <mat-error *ngIf="content.invalid">Please enter valid content</mat-error>
+      <mat-error *ngIf="form?.get('content')?.invalid">Please enter valid content</mat-error>
     </mat-form-field>
 
     <!-- Submit Button -->

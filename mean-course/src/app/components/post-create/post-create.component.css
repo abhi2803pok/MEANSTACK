@@ -19,3 +19,6 @@ form {
   flex-direction: column;
   gap: 16px; /* Adjust spacing as needed */
 }
+input[type="file"] {
+  display: none;
+}

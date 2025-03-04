@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Post = require("./models/post");
 const postsRoutes = require("./routes/posts");
+
 mongoose
   .connect(
     process.env.MONGODB_URI ||
@@ -16,7 +17,10 @@ mongoose
   .catch((error) => {
     console.error("Connection failed", error);
   });
+
 app.use(bodyParser.json());
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
@@ -32,6 +36,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/posts",postsRoutes);
+app.use("/api/posts", postsRoutes);
 
 module.exports = app;
