@@ -96,6 +96,8 @@ export class PostsService {
     );
   }
 
+
+
   addPost(title: string, content: string, image: File) {
     const postData = new FormData();
     postData.append('title', title);
@@ -122,6 +124,8 @@ export class PostsService {
           });
           this.router.navigate(['/']);
         }
-      });
+      }), (error: Error) => {
+      console.log(`Error in adding post. ${error}`);
+      }
   }
 }

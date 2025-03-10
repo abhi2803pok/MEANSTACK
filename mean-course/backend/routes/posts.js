@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 const Post = require("../models/post");
+const checkAuth = require("../middleware/check-auth");
 const mongoose = require("mongoose");
 
 const MIME_TYPE_MAP = {
@@ -47,6 +48,7 @@ const storage = multer.diskStorage({
 
 routes.post(
   "",
+  checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
@@ -83,7 +85,7 @@ routes.put("/:id", (req, res, next) => {
   });
 });
 
-routes.delete("/:id", (req, res, next) => {
+routes.delete("/:id", checkAuth, (req, res, next) => {
   const postId = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(postId)) {
     return res.status(400).json({ message: "Invalid ID" });

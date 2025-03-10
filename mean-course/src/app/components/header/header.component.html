@@ -2,9 +2,10 @@
 <mat-toolbar color="primary"><a routerLink="/">MESSAGES</a>
   <span class="spaces"></span>
   <ul>
-    <li><a routerLink="/create" routerLinkActive="mat-accent">New Post</a></li>
-    <li><a routerLink="/login" routerLinkActive="mat-accent">Log In</a></li>
+    <li *ngIf="isUserAuthenticated"><a routerLink="/create" routerLinkActive="mat-accent">New Post</a></li>
+    <li ><a routerLink="/login" routerLinkActive="mat-accent">Log In</a></li>
     <li><a routerLink="/signup" routerLinkActive="mat-accent">Signup</a></li>
+    <li *ngIf="isUserAuthenticated"><button>LogOut</button></li>
   </ul>
 </mat-toolbar>
 

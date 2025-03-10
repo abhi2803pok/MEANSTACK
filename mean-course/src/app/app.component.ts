@@ -1,3 +1,4 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PostCreateComponent } from "./components/post-create/post-create.component";
@@ -6,11 +7,8 @@ import { HeaderComponent } from "./components/header/header.component";
 import { PostListComponent } from './components/post-list/post-list.component';
 import { Post } from './components/post-models';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './components/auth/auth-interceptor';
 
-// interface Post {
-//   title: string;
-//   content: string;
-// }
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -20,13 +18,13 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     HttpClientModule
 ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'mean-course';
   storedPosts: Array<Post> = [];
-
 
   onPostAdded(post: Post) {
     this.storedPosts.push(post);
