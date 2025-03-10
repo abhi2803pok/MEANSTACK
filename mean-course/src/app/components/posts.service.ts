@@ -82,8 +82,7 @@ export class PostsService {
   }
 
   postDelete(id: string): Observable<any> {
-  return  this.httpClient
-      .delete('http://localhost:3000/api/posts/' + id);
+    return this.httpClient.delete('http://localhost:3000/api/posts/' + id);
   }
 
   getPostUpdatedListener() {
@@ -95,8 +94,6 @@ export class PostsService {
       'http://localhost:3000/api/posts/' + id
     );
   }
-
-
 
   addPost(title: string, content: string, image: File) {
     const postData = new FormData();
@@ -124,8 +121,9 @@ export class PostsService {
           });
           this.router.navigate(['/']);
         }
-      }), (error: Error) => {
-      console.log(`Error in adding post. ${error}`);
-      }
+      }),
+      (error: Error) => {
+        console.log(`Error in adding post. ${error}`);
+      };
   }
 }

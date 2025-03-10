@@ -1,3 +1,4 @@
+import { CanActivate } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
@@ -8,6 +9,8 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { Post } from './components/post-models';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './components/auth/auth-interceptor';
+import { AuthGuard } from './auth-guard';
+
 
 @Component({
   selector: 'app-root',
@@ -18,7 +21,7 @@ import { AuthInterceptor } from './components/auth/auth-interceptor';
     HeaderComponent,
     HttpClientModule
 ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AuthGuard],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

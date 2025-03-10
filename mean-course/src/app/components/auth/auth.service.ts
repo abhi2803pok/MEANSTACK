@@ -19,6 +19,10 @@ export class AuthService {
     return this.token;
   }
 
+  getIsAuth() {
+    return this.token != null;
+  }
+
   getAuthStatusListener() {
     return this.userAuthenticationStatus.asObservable();
   }
