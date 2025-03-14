@@ -57,6 +57,7 @@ routes.post(
       title: req.body.title,
       content: req.body.content,
       imagePath: url + "/images/" + req.file.filename,
+      creator: req.userData.userId,
     });
 
     console.log(post);
@@ -81,7 +82,11 @@ routes.put("/:id", (req, res, next) => {
     content: req.body.content,
   });
   Post.updateOne({ _id: req.params.id }, post).then((result) => {
-    res.status(200).json({ message: "Update successful!" });
+    if(result.nModified >= 0) {
+      res.status(200).json({ message: "Update successful!" });
+    } else {
+      res.status(401).json({ message: "Not authorized!" });
+    }
   });
 });
 
@@ -92,8 +97,12 @@ routes.delete("/:id", checkAuth, (req, res, next) => {
   }
 
   Post.deleteOne({ _id: postId }).then((result) => {
-    res.status(200).json({ message: "Post deleted!" });
-  });
+    if (result.n > 0) {
+      res.status(200).json({ message: "Post deleted!" });
+    } else {
+      res.status(401).json({ message: "Not authorized!" });
+    }
+  }).catch(next);
 });
 
 routes.get("", (req, res) => {

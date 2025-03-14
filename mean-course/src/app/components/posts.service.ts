@@ -65,6 +65,7 @@ export class PostsService {
                 id: post._id,
                 title: post.title,
                 content: post.content,
+                creator: post.creator
               };
             }),
             maxPosts: postData.maxPosts,
